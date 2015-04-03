@@ -10,9 +10,14 @@ RUN (curl -skL https://bintray.com/artifact/download/wfdemo/wildfly/wildfly.tar.
     chown -R java:java /wildfly &&\
     /wildfly/bin/add-user.sh --silent admin passw0rd!
 
+COPY desc.txt /
+COPY standalone.conf /wildfly/bin/
+
 USER java
+
+WORKDIR /wildfly
 
 EXPOSE 8080 9990
 
-ENTRYPOINT ["/wildfly/bin/standalone.sh"]
-CMD ["-b", "0.0.0.0", "-bmanagement", "0.0.0.0"]
+ENTRYPOINT []
+CMD ["/wildfly/bin/standalone.sh"]
